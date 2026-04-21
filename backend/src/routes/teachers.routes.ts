@@ -1,9 +1,11 @@
 import express from "express";
+import { onlyTeachers } from "../middleware/role.middleware";
+import { addTeacher, getTeachers } from "../controllers/teachers.controller";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ message: "Teachers API works 🚀" });
-});
+router.post("/",  addTeacher);
+router.get("/", onlyTeachers, getTeachers);
+
 
 export default router;
