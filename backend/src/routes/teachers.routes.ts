@@ -1,11 +1,11 @@
 import express from "express";
-import { onlyTeachers } from "../middleware/role.middleware";
+import { authenticate } from "../middleware/authenticate";
 import { addTeacher, getTeachers } from "../controllers/teachers.controller";
 
 const router = express.Router();
 
-router.post("/",  addTeacher);
-router.get("/", onlyTeachers, getTeachers);
+router.post("/", authenticate, addTeacher);
+router.get("/", authenticate, getTeachers);
 
 
 export default router;
