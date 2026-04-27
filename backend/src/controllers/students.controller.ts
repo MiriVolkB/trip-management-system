@@ -8,7 +8,7 @@ export const addStudent = async (req: any, res: any) => {
     const student = new Student({
       id,
       name,
-      studentClass,
+      class: req.body.class,
     });
 
     await student.save();
@@ -45,7 +45,7 @@ export const getStudentById = async (req: any, res:any) => {
     }
 }
 
-// 👤 קבלת תלמידים לפי כיתה ID
+// 👥 תלמידים לפי כיתה
 export const getStudentByClass = async (req: any, res: any) => {
     try{
         const { studentClass } = req.params;

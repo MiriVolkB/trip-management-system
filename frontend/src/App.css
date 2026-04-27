@@ -1,0 +1,142 @@
+:root {
+  /* Soft, professional color palette */
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --accent: #6366f1;
+  --accent-soft: #eef2ff;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --radius-xl: 30px;
+  --radius-lg: 20px;
+  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Centers everything horizontally */
+  color: var(--text-main);
+}
+
+/* 1. Centering & Spacing from "Walls" */
+.page-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto; /* Huge gap from top/bottom and centered */
+  padding: 0 40px; /* Space from the side walls */
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.app-header p {
+  color: var(--text-muted);
+}
+
+/* 2. Modern Layout */
+.main-layout {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* 3. Extremely Rounded Cards */
+.card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+}
+
+/* 4. Rounded Inputs & Buttons (No Stickers) */
+input {
+  width: 100%;
+  padding: 14px 25px;
+  margin-bottom: 15px;
+  /* The "Round" Magic */
+  border-radius: 50px;
+
+  /* Professional styling */
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Ensures padding doesn't break the width */
+}
+
+/* Add a subtle glow when clicking into the box */
+input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  background-color: #fff;
+}
+
+/* Make the buttons match the roundness */
+button {
+  border-radius: 50px;
+  padding: 14px 30px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s;
+}
+
+button:not(.pill):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* 5. Navigation "Pills" */
+.pill-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 40px; /* Fully round */
+  width: fit-content;
+}
+
+.pill {
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.pill.active {
+  background: white;
+  color: var(--accent);
+  box-shadow: var(--shadow-soft);
+}
+
+/* List Items (Rounded) */
+.list-item {
+  background: white;
+  margin-bottom: 10px;
+  padding: 15px 25px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f3f4f6;
+}
