@@ -7,6 +7,7 @@ import teacherRoutes from "./routes/teachers.routes";
 import dotenv from "dotenv";
 dotenv.config();
 
+console.log("APP LOADED");
 console.log("JWT SECRET:", process.env.JWT_SECRET); // 👈 כאן
 
 

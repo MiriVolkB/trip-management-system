@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addTeacher } from "../services/api";
+import {commonStyles  as styles} from "./ui/commonStyles";
 
 type Props = {
   onAdded: () => void;
@@ -21,30 +22,39 @@ export default function AddTeacher({ onAdded }: Props) {
     setId("");
     setTeacherClass("");
 
-    onAdded(); // אומר ל-App: תתרענן    
+    onAdded();
   };
 
   return (
-    <div className="card">
-      <h3>  + Add Teacher</h3>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2 style={styles.title}>הוספת מורה</h2>
 
-      <input
-        placeholder="Id"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-      />
-      
-      <input
-        placeholder="Class"
-        value={teacherClass}
-        onChange={(e) => setTeacherClass(e.target.value)}
-      />
-      <button onClick={handleSubmit}>Add</button>
+        <input
+          style={styles.input}
+          placeholder="שם"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          placeholder="תעודת זהות"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          placeholder="כיתה"
+          value={teacherClass}
+          onChange={(e) => setTeacherClass(e.target.value)}
+        />
+
+        <button style={styles.button} onClick={handleSubmit}>
+          הוסף מורה
+        </button>
+      </div>
     </div>
   );
 }

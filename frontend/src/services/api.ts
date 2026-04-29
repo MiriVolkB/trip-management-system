@@ -29,13 +29,14 @@ export const addStudent = async (data: any) => {
 
 // 👩‍🏫 מורות (עם role!)
 export const getTeachers = async (teacherClass?: string) => {
+  const token = localStorage.getItem("token"); // 👈 או איפה שאת שומרת
   const url = teacherClass
     ? `${BASE_URL}/teachers?class=${teacherClass}`
     : `${BASE_URL}/teachers`;
 
   const res = await fetch(url, {
     headers: {
-      role: "teacher", // 🔒 חשוב!
+      Authorization: `Bearer ${token}`, // 🔒 חשוב!
     },
   });
 

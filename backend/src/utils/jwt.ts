@@ -9,6 +9,7 @@ export function generateToken(user: any) {
   return jwt.sign(
     {
       id: user.id,
+      name: user.name,
       role: user.role,
       class: user.class,
     },
