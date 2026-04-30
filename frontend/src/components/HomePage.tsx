@@ -1,15 +1,34 @@
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MapView from "../components/MapView";
+import { getStudents, getTeachers } from "../services/api";
+import DashboardCards from "../components/DashboardCards";
 
 export default function HomePage() {
+
   const navigate = useNavigate();
+  const [students, setStudents] = useState([]);
+const [teachers, setTeachers] = useState([]);
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+const fetchData = async () => {
+  const s = await getStudents();
+  const t = await getTeachers();
+  setStudents(s || []);
+  setTeachers(t || []);
+};
 
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={{ marginBottom: "30px" }}>
-          מערכת ניהול טיול
-        </h1>
 
+      <h1 style={styles.title}>מערכת ניהול טיול 🚍</h1>
+    {/* CARDS */}
+  <DashboardCards teachers={teachers} students={students} />
+      {/* כפתורים באמצע */}
+      <div style={styles.card}>
         <button
           style={styles.button}
           onClick={() => navigate("/add-student")}
@@ -21,10 +40,8 @@ export default function HomePage() {
           style={styles.button}
           onClick={() => navigate("/add-teacher")}
         >
-          ➕ הוספת מורה
+          + הוספת מורה
         </button>
-
-        <div style={{ margin: "20px 0" }} />
 
         <button
           style={{ ...styles.button, background: "#10b981" }}
@@ -33,37 +50,58 @@ export default function HomePage() {
           🔐 כניסת מורה
         </button>
       </div>
+
+      {/* מפה מתחת */}
+      <div style={styles.mapWrapper}>
+        <MapView />
+      </div>
+
     </div>
   );
 }
 
 const styles = {
   container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    minHeight: "100vh",
     background: "#f4f6fb",
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center",
+    paddingTop: "40px",
+  },
+
+  title: {
+    marginBottom: "20px",
   },
 
   card: {
     background: "white",
-    padding: "40px",
+    padding: "25px",
     borderRadius: "16px",
-    width: "350px",
+    width: "320px",
     textAlign: "center" as const,
     boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+    marginBottom: "20px",
   },
 
   button: {
     width: "100%",
-    padding: "16px",
-    borderRadius: "30px",
+    padding: "12px",
+    borderRadius: "20px",
     border: "none",
     background: "#4f46e5",
     color: "white",
-    fontSize: "16px",
-    marginBottom: "12px",
+    fontSize: "14px",
+    marginBottom: "10px",
     cursor: "pointer",
+  },
+
+  mapWrapper: {
+    width: "90%",
+    maxWidth: "900px",
+    height: "500px",
+    borderRadius: "16px",
+    overflow: "hidden" as const,
+    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
   },
 };

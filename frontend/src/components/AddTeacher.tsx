@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addTeacher } from "../services/api";
 import {commonStyles  as styles} from "./ui/commonStyles";
 
@@ -10,6 +11,11 @@ export default function AddTeacher({ onAdded }: Props) {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
+  
+const [showToast, setShowToast] = useState(false);
+
+const navigate = useNavigate();
+
 
   const handleSubmit = async () => {
     await addTeacher({
@@ -23,6 +29,12 @@ export default function AddTeacher({ onAdded }: Props) {
     setTeacherClass("");
 
     onAdded();
+    setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+    navigate("/");
+  }, 1200);
   };
 
   return (
@@ -54,7 +66,16 @@ export default function AddTeacher({ onAdded }: Props) {
         <button style={styles.button} onClick={handleSubmit}>
           הוסף מורה
         </button>
+
+        
       </div>
+      {/* 🔥 TOAST */}
+      {showToast && (
+        <div style={styles.toastStyle}>
+          ✔ המורה נוסף בהצלחה
+        </div>
+      )}
     </div>
   );
 }
+

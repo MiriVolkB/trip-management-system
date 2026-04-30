@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addStudent } from "../services/api";
-import {commonStyles  as styles} from "./ui/commonStyles";
-
+import { commonStyles as styles } from "./ui/commonStyles";
 
 type Props = {
   onAdded: () => void;
@@ -11,6 +11,9 @@ export default function AddStudent({ onAdded }: Props) {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [studentClass, setStudentClass] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     await addStudent({
@@ -24,6 +27,15 @@ export default function AddStudent({ onAdded }: Props) {
     setStudentClass("");
 
     onAdded();
+
+   
+    setShowToast(true);
+
+    // אחרי שנייה → מעלימים + מעבר לדף הבית
+    setTimeout(() => {
+      setShowToast(false);
+      navigate("/");
+    }, 1200);
   };
 
   return (
@@ -56,6 +68,14 @@ export default function AddStudent({ onAdded }: Props) {
           הוסף תלמיד
         </button>
       </div>
+
+      {/* 🔥 TOAST */}
+      {showToast && (
+        <div style={styles.toastStyle}>
+          ✔ התלמיד נוסף בהצלחה
+        </div>
+      )}
     </div>
   );
 }
+

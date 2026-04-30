@@ -101,4 +101,27 @@ const styles = {
     background: "#eef2ff",
     borderRadius: "10px",
   },
+
+  success: {
+  marginTop: "15px",
+  color: "green",
+  fontWeight: "bold",
+  textAlign: "center" as const,
+},
+
+
+toastStyle : {
+  position: "fixed",
+  top: "20px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  background: "#22c55e",
+  color: "white",
+  padding: "12px 20px",
+  borderRadius: "12px",
+  boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+  fontWeight: "bold",
+  zIndex: 9999,
+  animation: "fadeIn 0.2s ease-in",
+},
 };
